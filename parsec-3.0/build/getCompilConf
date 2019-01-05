@@ -5,15 +5,18 @@
   cd pkgs
   pkgs=$(ls)
 
+  # apps  kernels  libs  netapps  tools
   for pkg in $pkgs
   do
     cd $pkg
   
+    # ./app blackscholes  bodytrack  facesim  ferret  fluidanimate	freqmine  raytrace  swaptions  vips  x264
     benchs=$(ls) 
 
     #For each benchmark we write available compile configurations in a file
     for bench in $benchs
     do
+      # 去掉icc.bldconf的.bldconf文件集的名字，比如gcc-hooks.bldconf获取的是gcc-hooks
       echo $bench : $(ls $bench/parsec/ | grep -v "icc" | grep '.bldconf$' | cut -d'.' -f 1) >> ../../compilConf.txt
     done
   
@@ -24,16 +27,17 @@
 
   #SPLASH2/SPLASH2X
   cd ext/
-
+  # splash2  splash2x
   splashdirs=$(ls)
 
 
   for splashdir in $splashdirs
   do
     cd $splashdir
-
+    # 获取去掉null_macros目录的所有目录
     for pkg in $(ls -d */ | grep -v "null_macros")
     do
+      # barnes	fmm  ocean_cp  ocean_ncp  radiosity  raytrace  volrend	water_nsquared	water_spatial
       benchs=$(ls $pkg/) 
 
       #For each benchmark we write available compile configurations in a file
@@ -44,7 +48,7 @@
 
     done
 
-  cd ..
+    cd ..
 
   done
 )
