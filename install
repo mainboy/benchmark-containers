@@ -1,0 +1,13 @@
+#!/bin/bash
+
+dir=/root/benchmark-containers/parsec-3.0
+
+cd ${dir}/base-image && docker build -t spirals/parsec-3.0:source .
+
+sleep 10s
+
+cd ${dir}/build && docker build -t spirals/parsec-3.0:untar .
+
+sleep 10s
+
+cd ${dir}/addbuild && docker build -t spirals/parsec-3.0:latest .
